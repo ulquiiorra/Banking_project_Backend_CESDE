@@ -2,10 +2,9 @@ package application.domain;
 
 import application.domain.enums.TransactionType;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Transactions {
+public class Transaction {
 
     private int id;
     private LocalDateTime timestamp;
@@ -14,7 +13,7 @@ public class Transactions {
     private double balanceAfterTransaction;
     private String description;
 
-    public Transactions(int id, LocalDate timestamp, TransactionType transactionType, double amount, double balanceAfterTransaction, String description) {
+    public Transaction(int id, TransactionType transactionType, double amount, double balanceAfterTransaction, String description) {
         this.id = id;
         this.timestamp = LocalDateTime.now();
         this.transactionType = transactionType;
@@ -49,7 +48,7 @@ public class Transactions {
 
     @Override
     public String toString() {
-        return "Transactions{" +
+        return "Transaction{" +
                 "id=" + id +
                 ", timestamp=" + timestamp +
                 ", transactionType=" + transactionType +

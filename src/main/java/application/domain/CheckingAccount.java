@@ -8,7 +8,7 @@ public class CheckingAccount extends Account {
     private double overdraftPercentage;
     private double overdraftLimit;
 
-    public CheckingAccount(String accountNumber, double balance, LocalDate dateOpened, String stateAccount, String accountType, List<Transactions> transactions, double overdraftPercentage, double overdraftLimit) {
+    public CheckingAccount(String accountNumber, double balance, LocalDate dateOpened, String stateAccount, String accountType, List<Transaction> transactions, double overdraftPercentage, double overdraftLimit) {
         super(accountNumber, balance, dateOpened, stateAccount, accountType, transactions);
         this.overdraftPercentage = overdraftPercentage;
         this.overdraftLimit = overdraftLimit;

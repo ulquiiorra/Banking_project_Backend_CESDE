@@ -6,7 +6,7 @@ import java.util.List;
 public class SavingsAccount extends Account {
     private double interestRate;
 
-    public SavingsAccount(String accountNumber, double balance, LocalDate dateOpened, String stateAccount, String accountType, List<Transactions> transactions, double interestRate) {
+    public SavingsAccount(String accountNumber, double balance, LocalDate dateOpened, String stateAccount, String accountType, List<Transaction> transactions, double interestRate) {
         super(accountNumber, balance, dateOpened, stateAccount, accountType, transactions);
         this.interestRate = interestRate;
     }

@@ -11,9 +11,9 @@ public abstract class Account {
     protected LocalDate dateOpened;
     protected AccountState accountState;
     protected String accountType;
-    protected List<Transactions> transactions;
+    protected List<Transaction> transactions;
 
-    public Account(String accountNumber, double balance, LocalDate dateOpened, String stateAccount, String accountType, List<Transactions> transactions) {
+    public Account(String accountNumber, double balance, LocalDate dateOpened, String stateAccount, String accountType, List<Transaction> transactions) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.dateOpened = LocalDate.now();
@@ -62,11 +62,11 @@ public abstract class Account {
         this.accountType = accountType;
     }
 
-    public List<Transactions> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<Transactions> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 

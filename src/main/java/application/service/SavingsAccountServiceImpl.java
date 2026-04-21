@@ -1,7 +1,9 @@
 package application.service;
 
 import application.domain.SavingsAccount;
+import application.domain.Transaction;
 import application.domain.enums.AccountState;
+import application.domain.enums.TransactionType;
 import application.service.outputs.SavingsAccountService;
 import application.service.ports.SavingsAccountRepositoryPort;
 
@@ -43,7 +45,51 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
         double newBalance = account.getBalance() - amount;
         account.setBalance(newBalance);
 
-        
+        //creare el registro de la transaccion
+        Transaction withdrawalReccord = new Transaction(
+                account.getTransactions().size() + 1,
+                TransactionType.WITHDRAWAL,
+                amount,
+                newBalance,
+                "Retiro en cuenta de ahorros desde el servicio"
+        );
+        account.getTransactions().add(withdrawalReccord);
+
+        repository.update(account);
+        System.out.println("Retiro exitoso. Nuevo saldo: $" + newBalance);
+
+    }
+
+    @Override
+    public void applyInterest(String accountNumber) {
+        Optional<SavingsAccount> accountOpt = repository.findById(accountNumber);
+
+        if (accountOpt.isPresent()) {
+            SavingsAccount account = accountOpt.get();
+            if (account.getAccountState() == AccountState.ACTIVE) {
+                double interestAmount = account.getBalance() * (account.getInterestRate() / 100);
+                double newBalance = account.getBalance() + interestAmount;
+
+                account.setBalance(newBalance);
+
+                Transaction interestReccord = new Transaction(
+                        account.getTransactions().size() + 1,
+                        TransactionType.DEPOSIT,
+                        interestAmount,
+                        newBalance,
+                        "Abono por liquidación de intereses"
+                );
+
+                account.getTransactions().add(interestReccord);
+
+                repository.update(account);
+                System.out.println("Intereses aplicados a la cuenta " + accountNumber + ": $" + interestAmount);
+            } else {
+                System.out.println("La cuenta " + accountNumber + " no está activa para recibir intereses.");
+            }
+            } else {
+            System.out.println("Error: La cuenta " + accountNumber + " no existe.");
+        }
     }
 
 }
